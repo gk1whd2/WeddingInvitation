@@ -11,8 +11,8 @@
       <div class="section">
         <ul>
           <div class="section-title btn-wrap">
-            <a :onclick="open_groom" class="an-btn btn type03 groom"> 신랑 측 계좌번호</a>
-            <a :onclick="open_bride" class="an-btn btn type03 bride"> 신부 측 계좌번호</a>
+            <a href="javascript:void(0);" :onclick="open_groom" class="an-btn btn type03 groom"> 신랑 측 계좌번호</a>
+            <a href="javascript:void(0);" :onclick="open_bride" class="an-btn btn type03 bride"> 신부 측 계좌번호</a>
           </div>
         </ul>
       </div>
@@ -37,9 +37,9 @@ export default {
 
       groom_info:{
         our:{
-          bank: "MG 마을금고",
+          bank: "새마을금고",
           name: "하종희",
-          account: "3020119094591",
+          account: "9003280396481",
         },
         family:[
           {

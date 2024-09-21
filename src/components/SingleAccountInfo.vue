@@ -4,7 +4,7 @@
             <dt>
                 <span>{{this.brideOrGroom}}</span>
                 계좌 
-                <a href="#" class="copy-account copy-btn" data-account=this.bankInfo.account> 복사하기</a>
+                <a href="javascript:void(0);" :onclick="this.copy_account" class="copy-account copy-btn" :data-account-name="this.bankInfo.bank" :data-account="this.bankInfo.account"> 복사하기</a>
             </dt>
             <dd>
                 <span> {{ this.bankInfo.bank }}</span>
@@ -25,8 +25,33 @@ export default {
   props:['brideOrGroom', 'bankInfo'],
   methods: {
     mounted() {
-        console.log(this.bankInfo)
     },
+    copy_account(e){
+        console.log(e)
+        let account_value = e.target.attributes['data-account'].value
+        let account_bank = e.target.attributes['data-account-name'].value
+        
+        var tempInput = document.createElement('input');
+        tempInput.value = account_value
+        document.body.appendChild(tempInput);
+
+        tempInput.style.position= 'absolute';
+        tempInput.style.left = '-9999px';
+
+        tempInput.select();
+        tempInput.setSelectionRange(0, 99999);
+
+        var successful = document.execCommand('copy');
+
+        if (successful){
+            alert("계좌번호가 복사되었습니다: " + account_bank + " " + account_value);
+        } else {
+            alert("복사에 실패했습니다.");
+        }
+
+        document.body.removeChild(tempInput);
+        
+    }
   }
 };
 </script>

@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="btn-wrap type01">
-      <a class="btn close" :onclick="handleClose">닫기</a>
+      <a href="javascript:void(0);" class="btn close" :onclick="handleClose">닫기</a>
     </div>
   </div>
   <div class="pop-mask"></div>
