@@ -1,7 +1,7 @@
 <template>
   <div class="heartfelt-wishes">
     <div class="header">
-      <h2><strong> 종희 & 유진에게 마음 전하기</strong></h2>
+      <h2><strong> 신랑 & 신부에게 마음 전하기</strong></h2>
     </div>
     <div class="header-body">
       <h3>축복의 의미로 축의금을 전달해보세요.</h3>

@@ -9,6 +9,14 @@
 						@click="handleClose"
 						src="~@/assets/images/close.svg"
 					/>
+					<img class="icon-prev"
+						@click="handlePrev"
+						src="~@/assets/images/icons/prev.png"
+					/>
+					<img class="icon-next"
+						@click="handleNext"
+						src="~@/assets/images/icons/next.png"
+					/>
 				</div>
 			</div>
 		</div>
@@ -37,6 +45,12 @@ export default {
 		handleClose() {
 			this.$emit("close");
 		},
+		handleNext(){
+			this.$emit('getOtherImage',1);
+		},
+		handlePrev(){
+			this.$emit('getOtherImage',-1);
+		},
 	},
 };
 </script>
@@ -51,7 +65,7 @@ export default {
 	.bottom-sheet {
 		width: 100%;
 		height: 100%;
-		background: black;
+		background-color: rgba(0,0,0,0.7);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -71,6 +85,26 @@ export default {
 				position: absolute;
 				right: 0;
 				top: 0;
+				padding: 16px;
+				cursor: pointer;
+			}
+			.icon-next{
+				position: absolute;
+				background-color: rgba(255,255,255,0.6);
+				right: 0;
+				top: 45%;
+				width: 60px;
+				height: 60px;
+				padding: 16px;
+				cursor: pointer;
+			}
+			.icon-prev{
+				position: absolute;
+				background-color: rgba(255,255,255,0.6);
+				left: 0;
+				top: 45%;
+				width: 60px;
+				height: 60px;
 				padding: 16px;
 				cursor: pointer;
 			}

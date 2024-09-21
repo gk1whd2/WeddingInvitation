@@ -7,13 +7,13 @@
     <div class="gallery-container" ref="gal">
       <div class="gallery-item" v-for="(photo, index) in photos" :key="index">
         <img :src="thumbnailUrl(photo.filename)" :alt="'photo' + photo.filename + '_' + (index + 1)"
-          @click=handleClick(thumbnailUrl(photo.filename)) :style="{
+          @click=handleClick(photoUrl(photo.filename),index) :style="{
           filter: `blur(${zoom_level}px)`,
         }" />
       </div>
     </div>
   </div>
-  <DetailImageView :is-open="isOpen" :PhotoUrl="selectedPhotoUrl" @close="handleClose" v-scroll-lock="isOpen" />
+  <DetailImageView :is-open="isOpen" :PhotoUrl="selectedPhotoUrl" @getOtherImage="getOtherImage" @close="handleClose" v-scroll-lock="isOpen" />
 </template>
 
 <script>
@@ -71,15 +71,28 @@ export default {
       return `https://was.jong2.site:3000/thumbnails/${filename}`;
     },
     photoUrl(filename) {
-      return `https://was.jong2.site:3000/images/${filename}`;
+      //return `https://was.jong2.site:3000/images/${filename}`;
+      return `https://was.jong2.site:3000/resized/${filename}`;
     },
-    handleClick(url) {
-      console.log(url)
+    handleClick(url,index) {
+      //console.log(url)
       this.isOpen = true;
+      this.current_index = index;
       this.selectedPhotoUrl = url;
     },
     handleClose() {
       this.isOpen = false;
+    },
+    getOtherImage(index){
+      let other_index = this.current_index + index;
+      if (other_index < 0 || other_index >= this.photos.length){
+        alert("Not Exists");
+        return 0;
+      }
+      
+      this.current_index = other_index;
+      this.selectedPhotoUrl = this.photoUrl(this.photos[this.current_index].filename);
+      return this.selectedPhotoUrl;
     },
     async fetchPhotos() {
       if (this.loading) return;
