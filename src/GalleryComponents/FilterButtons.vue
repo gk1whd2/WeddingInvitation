@@ -22,6 +22,7 @@ export default {
   name: "FilterButtons",
   data() {
     return {
+		limit:20,
 		pageSizes: [10,20, 30, 50, 100],
     };
   },
@@ -31,14 +32,15 @@ export default {
 		setFilterStatus(status){
 			this.filterStatus = status;
 			this.currentPage = 1;
-			this.fetchPhotos();
+			this.$emit('updateFilterStatus',this.filterStatus, this.currentPage, this.limit)
+			this.$emit('fetchPhotos')
 		},
 		toggleAllSize(){
 			this.image_size = this.image_size === 'small' ? 'large' : 'small';
 		},
 		updateLimit() {
 			this.currentPage = 1;
-			this.loadPage(this.currentPage);
+			this.$emit('loadPage',this.currentPage);
 		},
   },
 };

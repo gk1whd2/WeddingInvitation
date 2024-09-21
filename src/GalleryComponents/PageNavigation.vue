@@ -12,21 +12,24 @@
 <script>
 export default {
   name: "PageNavigation",
+  props:['currentPageProps','totalPagesProps'],
   data() {
     return {
     };
   },
+  computed: {
+	currentPage: function(){
+		return this.currentPageProps
+	},
+	totalPages: function(){
+		return this.totalPagesProps
+	}
+  },
   mounted() {
   },
   methods:{
-		async loadPage(page) {
-			if (page >= 1 && page <= this.totalPages) {
-				this.currentPage = page;
-				this.fetchPhotos();
-			}
-		},
 		goToPage(page) {
-			this.loadPage(page);
+			this.$emit('loadPage',page);
 		},
   },
 };

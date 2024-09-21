@@ -68,10 +68,10 @@ export default {
       this.zoom_level = 0;
     },
     thumbnailUrl(filename) {
-      return `http://125.178.112.194:3000/thumbnails/${filename}`;
+      return `https://was.jong2.site:3000/thumbnails/${filename}`;
     },
     photoUrl(filename) {
-      return `http://125.178.112.194:3000/images/${filename}`;
+      return `https://was.jong2.site:3000/images/${filename}`;
     },
     handleClick(url) {
       console.log(url)
@@ -86,7 +86,7 @@ export default {
       this.loading = true;
 
       try {
-        const response = await axios.get('http://125.178.112.194:3000/api/gallery_photos', {
+        const response = await axios.get('https://was.jong2.site:3000/api/gallery_photos', {
           params: {
             page: 1,
             limit: 20,

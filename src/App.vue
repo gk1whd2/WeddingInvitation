@@ -1,17 +1,14 @@
 <template>
   <head>
-    <RouterLink to="/main"> 
+    <RouterLink to="/"> 
       MainView
     </RouterLink>
     <RouterLink to="/gallery">
-      BackUpGalleryView
-    </RouterLink>
-    <RouterLink to="/gallery_test">
-      GalleryView
-    </RouterLink>
+    GalleryView
+	</RouterLink>
   </head>
-  <body>
-    <RouterView/>
+  <body>   
+        <RouterView/>
   </body>
 </template>
 

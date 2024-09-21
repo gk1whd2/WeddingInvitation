@@ -1,6 +1,5 @@
 <template>
   <div id="jong2">
-    <FlowerRain />
     <MainPage />
     <MainDivider />
     <MainSpacer />
@@ -9,11 +8,11 @@
     <Contact />
     <CustomGallery />
     <Map />
+	<HeartfeltWishes />
   </div>
 </template>
 
 <script>
-import FlowerRain from "./components/FlowerRain.vue";
 import MainPage from "./components/MainPage.vue";
 import MainSpacer from "./components/MainSpacer.vue";
 import MainDivider from "./components/MainDivider.vue";
@@ -22,11 +21,11 @@ import Contact from "./components/Contact.vue";
 import Story from "./components/Story.vue";
 import CustomGallery from "./components/CustomGallery.vue";
 import Map from "./components/Map.vue";
+import HeartfeltWishes from "./components/HeartfeltWishes.vue";
 
 export default {
   name: "MainView",
   components: {
-    FlowerRain,
     MainPage,
     MainSpacer,
     MainDivider,
@@ -35,6 +34,7 @@ export default {
     Contact,
     CustomGallery,
     Map,
+	HeartfeltWishes,
   },
   data() {
   },

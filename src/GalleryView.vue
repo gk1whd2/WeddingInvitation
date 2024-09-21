@@ -1,9 +1,7 @@
 <template>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<FilterButtons 
-		
-	/>
+	<FilterButtons @loadPage="loadPage" @fetchPhotos="fetchPhotos" @updateFilterStatus="updateFilterStatus"/>
 
 	<div class="photo-gallery">
 	<div class="photo" v-for="(photo, index) in photos" :key="index">
@@ -24,7 +22,7 @@
 	</div>
 	</div>
 
-	<PageNavigation />
+	<PageNavigation @loadPage="loadPage" @fetchPhotos="fetchPhotos" :currentPageProps=this.currentPage :totalPagesProps=this.totalPages />
 
 	<BottomSheet
 		:is-open="isOpen"
@@ -86,7 +84,7 @@ export default {
 			this.loading = true;
 
 			try{
-				const response = await axios.get('http://125.178.112.194:3000/api/photos',{
+				const response = await axios.get('https://was.jong2.site:3000/api/photos',{
 					params:{
 						page: this.currentPage,
 						limit: this.limit,
@@ -102,7 +100,7 @@ export default {
 			}
 		},
 		async updateImageStatus(photo){
-			await axios.post('http://125.178.112.194:3000/api/set_status',{
+			await axios.post('https://was.jong2.site:3000/api/set_status',{
 				file_name: photo.filename,
 				status: photo.status,
 				liked: photo.liked
@@ -115,10 +113,10 @@ export default {
 			}
 		},
 		thumbnailUrl(filename){
-			return `http://125.178.112.194:3000/thumbnails/${filename}`;
+			return `https://was.jong2.site:3000/thumbnails/${filename}`;
 		},
 		photoUrl(filename) {
-			return `http://125.178.112.194:3000/images/${filename}`;
+			return `https://was.jong2.site:3000/images/${filename}`;
 		},
 		toggleStatus(photo,button_type){
 			if (button_type === 'trash'){
@@ -163,6 +161,17 @@ export default {
 		},
 		getSizeClass(){
 			return this.image_size === 'small' ? 'small-image' : 'large-image';
+		},
+		updateFilterStatus(status, page, limit){
+			this.filterStatus = status
+			this.currentPage = page
+			this.limit = limit
+		},
+		async loadPage(page) {
+			if (page >= 1 && page <= this.totalPages) {
+				this.currentPage = page;
+				this.fetchPhotos();
+			}
 		},
 	}
 };

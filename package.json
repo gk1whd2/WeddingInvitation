@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve --host 0.0.0.0 --port 8012",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+	"deploy": "vue-cli-service build; gh-pages -d dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -29,12 +30,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@ivanv/vue-collapse-transition": "^1.0.2",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "@ivanv/vue-collapse-transition": "^1.0.2",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^6.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {

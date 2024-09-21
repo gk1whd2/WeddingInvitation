@@ -5,12 +5,12 @@
       <div class="text-overlay-top">
         <h1 class="happy-wedding">WEDDING INVITATION</h1>
       </div>
-      <img src="http://125.178.112.194:3000/images/HYH_0353-2.jpg" class="wedding-photo" />
+      <img src="https://was.jong2.site:3000/images/HYH_0353-2.jpg" class="wedding-photo" />
     </div>
+    <img src="https://was.jong2.site:3000/images/HYH_1311-2.jpg" class="wedding-photo" />
     <div class="text-overlay-top">
       <h1 class="happy-wedding">WEDDING INVITATION</h1>
     </div>
-    <img src="http://125.178.112.194:3000/images/HYH_1311-2.jpg" class="wedding-photo" />
   </div>
 
   <div class="main-title">
@@ -52,7 +52,7 @@ export default {
 .text-overlay-top {
   font-family: "DeluxeEdition";
   position: absolute;
-  top: 2%;
+  bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0);

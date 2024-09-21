@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true,
+	transpileDependencies: true,
 	css:{
 		loaderOptions: {
 			scss:{
@@ -8,4 +8,7 @@ module.exports = defineConfig({
 			},
 		},
 	},
+	publicPath: process.env.NODE_ENV === 'production'
+		? '/'//'/WeddingInvitation/'
+		: '/'//'WeddingInvitation/'
 })
