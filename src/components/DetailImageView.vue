@@ -6,15 +6,15 @@
 					<img class="image"	:src="PhotoUrl" @click.stop/>
 					<img
 						class="icon-close"
-						@click="handleClose"
+						@click.stop="handleClose"
 						src="~@/assets/images/close.svg"
 					/>
 					<img class="icon-prev"
-						@click="handlePrev"
+						@click.stop="handlePrev"
 						src="~@/assets/images/icons/prev.png"
 					/>
 					<img class="icon-next"
-						@click="handleNext"
+						@click.stop="handleNext"
 						src="~@/assets/images/icons/next.png"
 					/>
 				</div>
