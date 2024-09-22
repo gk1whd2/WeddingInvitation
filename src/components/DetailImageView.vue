@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="bottom-sheet-container" v-show="isOpen">
-			<div class="bottom-sheet">
-				<div class="bottom-sheet-header">
-					<img class="image"	:src="PhotoUrl"/>
+			<div class="bottom-sheet" @click="handleClose">
+				<div class="bottom-sheet-header" >
+					<img class="image"	:src="PhotoUrl" @click.stop/>
 					<img
 						class="icon-close"
 						@click="handleClose"
