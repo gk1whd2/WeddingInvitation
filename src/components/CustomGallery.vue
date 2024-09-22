@@ -6,7 +6,7 @@
 
     <div class="gallery-container" ref="gal">
       <div class="gallery-item" v-for="(photo, index) in photos" :key="index">
-        <img :src="thumbnailUrl(photo.filename)" :alt="'photo' + photo.filename + '_' + (index + 1)"
+        <img class="gallery-img" :src="thumbnailUrl(photo.filename)" :alt="'photo' + photo.filename + '_' + (index + 1)"
           @click=handleClick(photoUrl(photo.filename),index) :style="{
           filter: `blur(${zoom_level}px)`,
         }" />
@@ -79,15 +79,19 @@ export default {
       this.isOpen = true;
       this.current_index = index;
       this.selectedPhotoUrl = url;
+
+      document.body.style.overflow = 'hidden';
     },
     handleClose() {
       this.isOpen = false;
+      document.body.style.overflow = '';
     },
     getOtherImage(index){
       let other_index = this.current_index + index;
-      if (other_index < 0 || other_index >= this.photos.length){
-        alert("Not Exists");
-        return 0;
+      if (other_index<0) {
+        other_index = this.photos.length-1;
+      } else if (other_index >= this.photos.length){
+        other_index =0;
       }
       
       this.current_index = other_index;
@@ -143,7 +147,7 @@ export default {
   padding-right: $padding-vertical/2;
   text-align: center;
   color: #000000;//#295138;
-  // overflow: hidden;
+  //overflow: hidden;
 
   .description {
     font-size: 24px;
@@ -154,16 +158,17 @@ export default {
   .gallery-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 10px;
   }
   .gallery-item {
-    width:100%;
-    overflow: hidden;
-  }
-  .gallery-item img {
     width: 100%;
-    object-fit: cover;
+    overflow: hidden;
+
+    .gallery-img{
+      object-fit: cover;
+      width:100%;
+    }
   }
 }
 </style>

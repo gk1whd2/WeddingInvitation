@@ -14,12 +14,12 @@ export default {
 .main-divider {
   padding-left: $padding-vertical;
   padding-right: $padding-vertical;
-  padding-bottom: 35px;
-  padding-top: 35px;
+  padding-bottom: 28px;
+  padding-top: 28px;
   img {
     position: relative;
     width: 50%;
-    height: 250px;
+    height: 200px;
     left: 50%;
     transform: translateX(-50%);
   }

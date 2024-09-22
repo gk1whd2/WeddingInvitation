@@ -1,7 +1,5 @@
 <template>
   <div class="main-spacer">
-    <br />
-    <br />
   </div>
 </template>
 

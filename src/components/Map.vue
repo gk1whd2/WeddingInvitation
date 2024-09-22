@@ -16,19 +16,32 @@
   <div class="navigation">
     <div class="map">
       <div class="map-container" >
-        <KakaoMap 
+          <KakaoMap ref="kakaoMap"
             :lat="center_lat"
             :lng="center_lng"
             :draggable="true"
-            :height=200
-            :width=$max-width
-            :level="level">
+            :height=250
+            :level="level"
+            @onLoadKakaoMap="onLoadKakaoMap">
+
+            <KakaoMapMarker 
+              v-for="(item, index) in parkingLots"
+              @onClickKakaoMapMarker="handleMarkerClick(item)"
+              :key="'Marker'+index"
+              :title="item.title"
+              :clickable="true"
+              :image="MarkerImage"
+              :lat="item.lat"
+              :lng="item.lng"/>
+
             <KakaoMapMarker
-              title="Title"
+              title="JnJ아트컨벤션"
+              :z-index="99"
               :lat="center_lat" 
               :lng="center_lng"/>
         </KakaoMap>
       </div>
+    </div>
 
       <div class="cover">
         <div class="navi-apps">
@@ -57,39 +70,115 @@
         </div>
       </div>
 
-      <div class="navi-image">
-          <div class="image">
-              <img src="~@/assets/images/예식장_약도.png" />
-          </div>
+      <div class="navi-image-section">
+        <h3 class="expand-button" @click="toggleSection">
+          예식장 약도 보기<br><font-awesome-icon :icon="isNaviImageVisible ? 'chevron-up' : 'chevron-down'"/>
+        </h3>
       </div>
-    </div>
+
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
+      >
+        <div class="navi-image-container" v-show="isNaviImageVisible">
+          <div class="navi-image">
+              <div class="image">
+                  <img src="~@/assets/images/예식장_약도.png" />
+              </div>
+          </div>
+        </div>
+      </transition>
   </div>
 </template>
 
 <script>
 
-import {KakaoMap, KakaoMapMarker} from 'vue3-kakao-maps'
+import {KakaoMap, KakaoMapMarker} from 'vue3-kakao-maps';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+
+library.add(faEnvelope);
 
 export default {
   name: "CustomMap",
-  components: {KakaoMap, KakaoMapMarker},
+  components: {KakaoMap, KakaoMapMarker,FontAwesomeIcon},
   data() {
     return {
-      center_lat : 37.000223,
-      center_lng : 127.115265,
+      isNaviImageVisible:false,
+
       level: 3, // 지도의 레벨(확대, 축소 정도),
 
       //////////////
       tmapUrl: "",
       kakaoTaxiUrl: "",
       navermapUrl: "",
-      kakaomapUrl: ""
+      kakaomapUrl: "",
+
+      MarkerImage: {
+        imageSrc:"https://map.pstatic.net/resource/api/v2/image/maps/selected-marker/default@2x.png?version=8",
+        imageWidth:"29",
+        imageHeight:"42"
+      },
+      parkingLots: [
+        {
+          title:"1주차장 골든타워",
+          info:{content:"평택시 비전5로 20-9", visible:true},
+          lat: "36.9993942",
+          lng: "127.1139752",
+        },
+        {
+          title:"2주차장 시계탑",
+          info:{content:"평택시 비전5로 21"},
+          lat: "37.0007409",
+          lng: "127.1135761",
+        },
+        {
+          title:"3주차장 J타워",
+          info:{content:"평택시 비전5로 35"},
+          lat: "37.0018498",
+          lng: "127.1144759",
+        },
+        {
+          title:"4주차장 제1공영추자장",
+          info:{content:"평택시 비전동 1099"},
+          lat: "37.0009089",
+          lng: "127.1151249",
+        },
+        {
+          title:"5주차장 제2공영주차장",
+          info:{content:"평택시 죽백동 799"},
+          lat: "37.0030418",
+          lng: "127.1153637",
+        },
+        {
+          title:"6주차장 세무서",
+          info:{content:"평택시 죽백6로 6"},
+          lat: "37.0034424",
+          lng: "127.1175114",
+        },
+      ],
+      center_lat : 37.000223,
+      center_lng : 127.115265,
     };
   },
   mounted() {
     this.makeUrls()
   },
   methods: {
+    onLoadKakaoMap(){
+      console.log(this.$refs.kakaoMap.lat);
+      console.log(this.$refs.kakaoMap.lng);
+      //this.$refs.kakaoMap.set('lat',37.000223);
+      //this.$refs.kakaoMap.set('lng',127.115265);
+      //this.$refs.kakaoMap.lat = 37.000223;
+      //this.$refs.kakaoMap.lng = 127.115265;
+    },
+    handleMarkerClick(item){
+      let alert_msg = item.title + '\n' + item.info.content
+      alert(alert_msg)
+    },
     makeUrls() {
       // 장소데이터의 이름정보 불러온 뒤
       const locationName = "제이앤제이아트컨벤션"
@@ -97,7 +186,28 @@ export default {
       this.kakaoTaxiUrl = "https://t.kakao.com/launch?type=taxi&amp;dest_lat=37.000223&amp;dest_lng=127.115265&amp;ref=localweb"
       this.navermapUrl = "nmap://search?query=" + locationName + "&appname=kimyoon21.github.io/wedding"
       this.kakaomapUrl = "kakaomap://search?q=" + locationName
-    }
+    },
+    toggleSection(){
+      this.isNaviImageVisible = !this.isNaviImageVisible;
+    },
+    beforeEnter(e){
+      console.log(this.$refs.kakaoMap.lat);
+      console.log(this.$refs.kakaoMap.lng);
+      e.style.maxHeight= '0';
+      e.style.opacity='0';
+      e.style.transition = 'none';
+    },
+    enter(el){
+      el.offsetHeight;
+      el.style.transition = 'max-height 0.5s ease, opacity 0.5s ease';
+      el.style.maxHeight = el.scrollHeight + 'px';
+      el.style.opacity= '1';
+    },
+    leave(el){
+      el.style.transition = 'max-height 0.5s ease, opacity 0.5s ease';
+      el.style.maxHeight = '0'
+      el.style.opacity= '0';
+    },
   }
 };
 </script>
@@ -105,7 +215,7 @@ export default {
 <style lang="scss" scoped>
 .location{
   padding-top: 32px;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;
@@ -179,6 +289,10 @@ export default {
 
 .link {
   color: #295238;
+}
+
+.expand-button{
+  cursor: pointer;
 }
 
 </style>

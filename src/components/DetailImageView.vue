@@ -62,6 +62,7 @@ export default {
 	bottom: 0;
 	top: 0;
 	position: fixed;
+	z-index: 9999;
 	.bottom-sheet {
 		width: 100%;
 		height: 100%;
