@@ -7,7 +7,7 @@
       </p>
       <p class="our-story">
         우리의 이야기가 시작되었습니다.<br/>
-        그리고 이제, 함께하는 삶을 시작하려 합니다. 
+        그리고 이제, 함께하는 삶을 시작하려 합니다.
       </p>
       <p class="our-story">
         저희 두 사람, <br />
@@ -47,6 +47,10 @@ export default {
       line-height: 40px;
       padding-top: 10px;
       padding-bottom: 10px;
+
+      word-break:keep-all;
+      white-space:nowrap;
+      overflow:hidden;
     }
 
     &.our-name {

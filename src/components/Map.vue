@@ -20,9 +20,9 @@
             :lat="center_lat"
             :lng="center_lng"
             :draggable="true"
+            :width=$max-width
             :height=250
-            :level="level"
-            @onLoadKakaoMap="onLoadKakaoMap">
+            :level="level">
 
             <KakaoMapMarker 
               v-for="(item, index) in parkingLots"
@@ -167,14 +167,6 @@ export default {
     this.makeUrls()
   },
   methods: {
-    onLoadKakaoMap(){
-      console.log(this.$refs.kakaoMap.lat);
-      console.log(this.$refs.kakaoMap.lng);
-      //this.$refs.kakaoMap.set('lat',37.000223);
-      //this.$refs.kakaoMap.set('lng',127.115265);
-      //this.$refs.kakaoMap.lat = 37.000223;
-      //this.$refs.kakaoMap.lng = 127.115265;
-    },
     handleMarkerClick(item){
       let alert_msg = item.title + '\n' + item.info.content
       alert(alert_msg)
