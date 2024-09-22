@@ -36,11 +36,11 @@ export default {
       is_bride_open: false,
 
       groom_info:{
-        our:{
+        our:[{
           bank: "새마을금고",
           name: "하종희",
           account: "9003280396481",
-        },
+        }],
         family:[
           {
             bank: "농협",
@@ -55,11 +55,11 @@ export default {
         ]
       },
       bride_info:{
-        our:{
+        our:[{
           bank: "국민",
           name: "임유진",
           account: "74470200230378",
-        },
+        }],
         family:[
           {
             bank: "농협",
@@ -98,7 +98,7 @@ export default {
   margin: auto;
   text-align: center;
   font-family: "MaruBuri", serif;
-  background-color: #f9f9fb; 
+  //background-color: #f9f9fb; 
   padding: 20px;
 }
 

@@ -141,8 +141,8 @@ export default {
 
 <style lang="scss" scoped>
 .gallery {
-  padding-top: 32px;
-  padding-bottom: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;

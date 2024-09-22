@@ -206,8 +206,8 @@ export default {
 
 <style lang="scss" scoped>
 .location{
-  padding-top: 32px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;
@@ -232,7 +232,7 @@ export default {
 }
 
 .navigation{
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;

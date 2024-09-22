@@ -3,9 +3,7 @@
   <div class="layer-pop">
     <div class="account-list">
       <SingleAccountInfo :brideOrGroom=this.brideOrGroom :bankInfo=this.AccountInfo.our />
-      <div v-for="bank_info in this.AccountInfo.family" v-bind:key="bank_info" >
-        <SingleAccountInfo :brideOrGroom=this.brideOrGroomFamily :bankInfo=bank_info />
-      </div>
+      <SingleAccountInfo :brideOrGroom=this.brideOrGroomFamily :bankInfo=this.AccountInfo.family />
     </div>
     <div class="btn-wrap type01">
       <a href="javascript:void(0);" class="btn close" :onclick="handleClose">닫기</a>

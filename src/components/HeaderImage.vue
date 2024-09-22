@@ -30,7 +30,7 @@ export default {
 .header {
   margin-bottom: 16px;
   line-height: 36px;
-  font-size: 24px;
+  font-size: 20px;
   color: #000000;//#295238;
 }
 </style>

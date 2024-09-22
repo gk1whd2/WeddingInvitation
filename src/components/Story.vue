@@ -28,8 +28,8 @@ export default {
 <style lang="scss" scoped>
 .story {
   font-family: "MaruBuri";
-  padding-top: 4px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: $padding-vertical;
   padding-right: $padding-vertical;
   text-align: center;
@@ -37,9 +37,9 @@ export default {
 
   p {
     margin-bottom: 16px;
-    font-size: 18px;
+    font-size: 16px;
     &.header{
-      font-size:22px;
+      font-size:20px;
       line-height: 40px;
     }
 
@@ -51,13 +51,6 @@ export default {
       word-break:keep-all;
       white-space:nowrap;
       overflow:hidden;
-    }
-
-    &.our-name {
-      font-size: 22px;
-      color: #000000;//#266653;
-      margin: 20px 0;
-      font-weight: 600;
     }
 
     &.header {

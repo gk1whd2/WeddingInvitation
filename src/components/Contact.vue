@@ -172,7 +172,7 @@ mounted() {
   margin: auto;
   text-align: center;
   font-family: "MaruBuri", serif;
-  background-color: #f9f9fb; 
+  //background-color: #f9f9fb; 
   padding: 20px;
 }
 
@@ -203,7 +203,7 @@ mounted() {
   display: flex;
   justify-content: center;
   margin-top: 5px;
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 .icons font-awesome-icon {

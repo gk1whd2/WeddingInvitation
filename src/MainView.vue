@@ -6,9 +6,9 @@
     <HeaderImage />
     <Story />
     <Contact />
+    <HeartfeltWishes />
     <CustomGallery />
     <Map />
-	<HeartfeltWishes />
   </div>
 </template>
 

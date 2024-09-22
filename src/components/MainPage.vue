@@ -1,12 +1,6 @@
 <template>
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css" rel="stylesheet">
   <div class="wedding-invite">
-    <div v-show="false">
-      <div class="text-overlay-top">
-        <h1 class="happy-wedding">WEDDING INVITATION</h1>
-      </div>
-      <img src="https://was.jong2.site:3000/images/HYH_0353-2.jpg" class="wedding-photo" />
-    </div>
     <img src="https://was.jong2.site:3000/images/HYH_1311-2.jpg" class="wedding-photo" />
     <div class="text-overlay-top">
       <h1 class="happy-wedding">WEDDING INVITATION</h1>
@@ -70,14 +64,15 @@ export default {
 }
 .our-name {
   font-family: "MaruBuri", serif;
-  font-size: 35px;
+  font-size: 28px;
+  text-align: center;
   color: #000000;//#266653;
   margin: 30px 0;
   font-weight: 600;
 }
 .header{
   font-family: "MaruBuri";
-  font-size: 25px;
+  font-size: 18px;
   color: #000000;//#295238;
 }
 
@@ -85,18 +80,9 @@ export default {
   white-space: nowrap;
 }
 
-h1,
-p {
-  margin: 10px;
-}
-
-h1 {
+.happy-wedding{
   font-size: 2em;
   font-weight: 600;
-}
-
-p {
-  font-size: 1.2em;
-  text-align: center;
+  margin: 10px;
 }
 </style>
