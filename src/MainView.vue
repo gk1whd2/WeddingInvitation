@@ -1,14 +1,15 @@
 <template>
   <div id="jong2">
-    <MainPage />
-    <MainDivider />
-    <MainSpacer />
-    <HeaderImage />
-    <Story />
-    <Contact />
-    <HeartfeltWishes />
-    <CustomGallery />
-    <Map />
+	<MainPage />
+	<MainDivider />
+	<MainSpacer />
+	<HeaderImage />
+	<Story />
+	<Contact />
+	<HeartfeltWishes />
+	<CustomGallery />
+	<Map />
+	<GuestBook />
   </div>
 </template>
 
@@ -22,19 +23,21 @@ import Story from "./components/Story.vue";
 import CustomGallery from "./components/CustomGallery.vue";
 import Map from "./components/Map.vue";
 import HeartfeltWishes from "./components/HeartfeltWishes.vue";
+import GuestBook from "./components/GuestBook.vue";
 
 export default {
   name: "MainView",
   components: {
-    MainPage,
-    MainSpacer,
-    MainDivider,
-    HeaderImage,
-    Story,
-    Contact,
-    CustomGallery,
-    Map,
+	MainPage,
+	MainSpacer,
+	MainDivider,
+	HeaderImage,
+	Story,
+	Contact,
+	CustomGallery,
+	Map,
 	HeartfeltWishes,
+	GuestBook,
   },
   data() {
   },

@@ -23,8 +23,6 @@ export default {
   name: "SingleBankInfo",
   props:['brideOrGroom', 'bankInfo'],
   methods: {
-    mounted() {
-    },
     copy_account(e){
         console.log(e)
         let account_value = e.target.attributes['data-account'].value

@@ -76,11 +76,12 @@ export default {
 			overflow: hidden;
 			flex: 10 1;
 			.image {
-				width: 100%;
+				height: 100%;
 				object-fit: cover;
-				position: relative;
+				position: absolute;
 				top: 50%;
-				transform: translateY(-50%);
+				left: 50%;
+				transform: translate(-50%,-50%);
 			}
 			.icon-close {
 				position: absolute;
