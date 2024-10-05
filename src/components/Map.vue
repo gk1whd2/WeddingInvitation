@@ -2,6 +2,7 @@
   <div class="location">
     <div class="description">
       Location
+      <br/> 오시는 길
     </div>
       <div class="location-detail">
         제이앤제이 아트컨벤션 2층 제이드팰리스홀
@@ -69,6 +70,7 @@
           </a>
         </div>
       </div>
+      <br/>
 
       <div class="navi-image-section">
         <h3 class="expand-button" @click="toggleSection">
@@ -76,6 +78,7 @@
         </h3>
       </div>
 
+      <br/>
       <transition
         @before-enter="beforeEnter"
         @enter="enter"
@@ -239,7 +242,8 @@ export default {
   color: #000000;//#295138;
 }
 .map-container{
-  max-width: $max-width;
+  //max-width: $max-width;
+  max-width: 100%;
 }
 .navi-image{
   max-width: $max-width;

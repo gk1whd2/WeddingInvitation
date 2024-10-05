@@ -9,7 +9,6 @@
 	<HeartfeltWishes />
 	<CustomGallery />
 	<Map />
-	<GuestBook />
   </div>
 </template>
 
@@ -23,7 +22,7 @@ import Story from "./components/Story.vue";
 import CustomGallery from "./components/CustomGallery.vue";
 import Map from "./components/Map.vue";
 import HeartfeltWishes from "./components/HeartfeltWishes.vue";
-import GuestBook from "./components/GuestBook.vue";
+//import GuestBook from "./components/GuestBook.vue";
 
 export default {
   name: "MainView",
@@ -37,7 +36,7 @@ export default {
 	CustomGallery,
 	Map,
 	HeartfeltWishes,
-	GuestBook,
+	//GuestBook,
   },
   data() {
   },
@@ -168,6 +167,8 @@ menu,
 nav,
 section {
   display: block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 body {

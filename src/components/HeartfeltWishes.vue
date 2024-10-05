@@ -4,7 +4,7 @@
       <h2><strong> 신랑 & 신부에게 마음 전하기</strong></h2>
     </div>
     <div class="header-body">
-      <h3>축복의 의미로 축의금을 전달해보세요.</h3>
+      <h3 style="display:none">축복의 의미로 축의금을 전달해보세요.</h3>
     </div>
 
     <div class="body">
@@ -95,6 +95,7 @@ export default {
 <style lang="scss" scoped>
 .heartfelt-wishes{
   max-width: 800px;
+  //width: 100%;
   margin: auto;
   text-align: center;
   font-family: "MaruBuri", serif;

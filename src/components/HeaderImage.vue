@@ -7,11 +7,14 @@
     </div>
   </div>
   <img src="~@/assets/images/hands_image.png" class="hands" />
+
 </template>
 
 <script>
 export default {
   name: "HeaderImage",
+  methods:{
+  },
 };
 </script>
 
@@ -19,7 +22,10 @@ export default {
 .hands {
   width: 100%;
 }
-
+p{
+  text-decoration: none;
+  cursor: pointer;
+}
 .header-image {
   padding-top: 4px;
   padding-bottom: 10px;

@@ -169,6 +169,7 @@ mounted() {
 <style lang="scss" scoped>
 .contact {
   max-width: 800px;
+  //width:100%;
   margin: auto;
   text-align: center;
   font-family: "MaruBuri", serif;
