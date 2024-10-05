@@ -5,12 +5,14 @@
     </div>
 
     <div class="gallery-container" ref="gal">
-      <div class="gallery-item" v-for="(photo, index) in photos" :key="index">
+      <div class="gallery-item" v-for="(photo, index) in displayedImages" :key="index">
         <img class="gallery-img" :src="thumbnailUrl(photo.filename)" :alt="'photo' + photo.filename + '_' + (index + 1)"
-          @click=handleClick(photoUrl(photo.filename),index) :style="{
-          filter: `blur(${zoom_level}px)`,
-        }" />
+          @click=handleClick(photoUrl(photo.filename),index) />
       </div>
+    </div>
+
+    <div v-if="hasMoreImages" class="load-more-images">
+      <button @click="loadMoreImages" class="load-more-btn"> 더보기 </button>
     </div>
   </div>
   <DetailImageView :is-open="isOpen" :PhotoUrl="selectedPhotoUrl" @getOtherImage="getOtherImage" @close="handleClose" v-scroll-lock="isOpen" />
@@ -31,41 +33,24 @@ export default {
       isOpen: false,
       selectedPhotoUrl: '',
 
-      scrollX: 0,
-      zoom_width: 0,
-      zoom_level: 0,
-      width: 320,
-      zoomX: 1,
-      zoomLevel: -1,
+      imagesPerRow: 3,
+      displayedRows: 3,
     };
   },
+  computed: {
+    displayedImages(){
+      return this.photos.slice(0, this.imagesPerRow * this.displayedRows);
+    },
+    hasMoreImages(){
+      return this.photos.length > this.displayedImages.length;
+    }
+  },
   mounted() {
-    this.width = Math.max(
-      document.documentElement.clientWidth || 0,
-      window.innerWidth || 0
-    );
-    this.$refs.gal.scrollLeft = 0;
-    this.zoom_width = window.innerWidth;
-    this.updateZoomX();
-    window.addEventListener('resize', this.updateZoomX);
-
-    this.updateZoomX();
     this.fetchPhotos();
   },
-  beforeUnmount() {
-    // window.removeEventListener('resize');
-  },
   methods: {
-    updateZoomX() {
-      let new_zw = window.innerWidth;
-      this.zoom_level = 10 * ((this.zoom_width / new_zw) - 1) <=
-        1
-        ? 0
-        : 10 * ((this.zoom_width / new_zw) - 1) > 3
-          ? 3
-          : 10 * ((this.zoom_width / new_zw) - 1)
-      this.zoomX = (new_zw / this.zoom_width)
-      this.zoom_level = 0;
+    loadMoreImages(){
+      this.displayedRows+=1;
     },
     thumbnailUrl(filename) {
       return `https://was.jong2.site:3000/thumbnails/${filename}`;
@@ -171,6 +156,15 @@ export default {
       object-fit: over;
       width:100%;
     }
+  }
+  .load-more-btn{
+    padding: 1em 2em;
+    background-color: #A0A0A0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius:5ps;
+    margin-top: 20px;
   }
 }
 </style>
