@@ -168,7 +168,7 @@ export default {
     overflow: hidden;
 
     .gallery-img{
-      object-fit: cover;
+      object-fit: over;
       width:100%;
     }
   }

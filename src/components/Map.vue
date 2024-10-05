@@ -95,6 +95,23 @@
           </div>
         </div>
       </transition>
+
+      <div v-if="showModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-text">
+            <p>
+            {{  this.selected_parking_lot }}
+            </p>
+            <br/>
+            <p>{{ this.selected_parking_lot_addr}}</p>
+            <p class="copied" v-show=this.parking_lot_addr_copied> 
+              {{ this.parking_lot_addr_copied_text}}
+            </p>
+          </div>
+          <button class="modal-button" @click="copyToClipboard">주소 복사</button>
+          <button class="modal-button" @click="closeModal">닫기</button>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -113,6 +130,12 @@ export default {
   data() {
     return {
       isNaviImageVisible:false,
+
+      showModal: false,
+      selected_parking_lot : null,
+      marker_text : '',
+      parking_lot_addr_copied :true,
+      parking_lot_addr_copied_text : '',
 
       level: 3, // 지도의 레벨(확대, 축소 정도),
 
@@ -174,8 +197,9 @@ export default {
   },
   methods: {
     handleMarkerClick(item){
-      let alert_msg = item.title + '\n' + item.info.content
-      alert(alert_msg)
+      this.selected_parking_lot = item.title
+      this.selected_parking_lot_addr = item.info.content
+      this.openModal()
     },
     makeUrls() {
       // 장소데이터의 이름정보 불러온 뒤
@@ -205,6 +229,26 @@ export default {
       el.style.transition = 'max-height 0.5s ease, opacity 0.5s ease';
       el.style.maxHeight = '0'
       el.style.opacity= '0';
+    },
+
+    openModal(){
+      this.showModal =true;
+    },
+    closeModal(){
+      this.parking_lot_addr_copied = false;
+      this.parking_lot_addr_copied_text= '';
+      this.showModal = false;
+    },
+    copyToClipboard(){
+      const tempInput = document.createElement('textarea');
+      tempInput.value = this.selected_parking_lot_addr
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      this.parking_lot_addr_copied = true;
+      this.parking_lot_addr_copied_text= '주차장 주소가 복사되었습니다.';
     },
   }
 };
@@ -304,5 +348,45 @@ export default {
 .parking-log-icon{
   width: 1em;
 
+}
+
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content{
+  background-color: white; /* 모달 내용 배경은 흰색 */
+  padding: 1em;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  z-index: 9999; /* 가장 앞에 표시되도록 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.modal-button{
+  margin: 1em;
+  padding: 1em 2em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.copied{
+  font-size: 0.7;
+  color: blue;
+  padding-top:1em;
+  
 }
 </style>

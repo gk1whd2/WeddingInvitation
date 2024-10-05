@@ -77,7 +77,8 @@ export default {
 			flex: 10 1;
 			.image {
 				height: 100%;
-				object-fit: cover;
+				width: 100%;
+				object-fit: contain;
 				position: absolute;
 				top: 50%;
 				left: 50%;
