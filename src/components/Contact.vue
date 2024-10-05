@@ -1,5 +1,11 @@
 <template>
   <div class="contact">
+    <div class="introduce">
+      <p>
+      <strong>하창규</strong>·<strong>정현숙</strong>의 아들<strong>종희</strong>
+      </p>
+      <pre><strong>임채홍</strong>·<strong>김연수</strong>의   딸 <strong>유진</strong></pre>
+    </div>
     <div class="header">
       <div class="section">
         <h2><strong> 신랑 </strong></h2>
@@ -169,12 +175,19 @@ mounted() {
 <style lang="scss" scoped>
 .contact {
   max-width: 800px;
-  //width:100%;
   margin: auto;
   text-align: center;
   font-family: "MaruBuri", serif;
-  //background-color: #f9f9fb; 
-  padding: 20px;
+  padding-top: 2em;
+  padding-bottom:2em;
+
+  .introduce{
+    font-size: 1.2em;
+    line-height: 1.8em;
+    margin-bottom: 40px;
+    padding-top: 2em;
+    padding-bottom:2em;
+  }
 }
 
 .header {
@@ -240,22 +253,15 @@ svg {
 
 strong {
   margin-left: 10px;
+  margin-right: 10px;
   font-weight: 600;
 }
 
-expand-button {
+.expand-button {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.h3 {
-  padding: 10px;
-}
-
-h2, h3{
-  color: rgba(60,60,60,0.8);
 }
 
 h3 font-awesome-icon {

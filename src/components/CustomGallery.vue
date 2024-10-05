@@ -141,8 +141,8 @@ export default {
 
 <style lang="scss" scoped>
 .gallery {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 2em;
+  padding-bottom: 3em;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;
@@ -150,9 +150,11 @@ export default {
   //overflow: hidden;
 
   .description {
-    font-size: 24px;
-    letter-spacing: 6px;
-    margin-bottom: 30px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    padding-bottom: 2em;
+    font-weight: 600;
+    color: #3E4F43;//#505050;
   }
 
   .gallery-container {

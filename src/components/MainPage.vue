@@ -1,23 +1,28 @@
 <template>
   <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-myeongjo.css" rel="stylesheet">
-  <div class="player-div">
-    <div id="player"></div>
-  </div>
-  <div class="wedding-invite" @mousemove="play_player()" @touchmove="touchstart()">
-    <img src="https://was.jong2.site:3000/images/HYH_1311-2.jpg" class="wedding-photo" />
-    <div class="text-overlay-corner">
-      <font-awesome-icon class="pause-play-button" :icon="playCounter== 1 ? ['fas', 'pause'] : ['fas','play']" @click="play_pause_click()"/>
+  <div class="main-page">
+    <div class="wedding-invite" @click="startPlayback()" @touchstart="startPlayback()">
+      <img src="https://was.jong2.site:3000/images/HYH_1311-2.jpg" class="wedding-photo" />
+      <div class="text-overlay-corner">
+        <font-awesome-icon class="pause-play-button" :icon="this.isPlay? ['fas', 'pause'] : ['fas','play']" @click.stop="play_pause_click()"/>
+      </div>
+      <div class="text-overlay-bottom">
+        <h1 class="happy-wedding"><p class="left">Wedding</p> <p class="right">Invitation</p></h1>
+      </div>
     </div>
-    <div class="text-overlay-top">
-      <h1 class="happy-wedding">WEDDING INVITATION</h1>
-    </div>
-  </div>
 
-  <div class="main-title">
-    <h1 class="no-wrap our-name"> 하종희 & 임유진 </h1>
-    <p class="header">
-      결혼합니다.
-    </p>
+    <div class="main-title">
+      <h1 class="no-wrap"> 하종희 & 임유진 </h1>
+      <p>
+        결혼합니다.
+      </p>
+    </div>
+
+    <div class="location-date">
+      <p> 2024.11.09 토요일 14:40 </p>
+      <p> 평택 제이앤제이 아트컨벤션 </P>
+      <p> 2층 제이드 팰리스 홀 </p>
+    </div>
   </div>
 </template>
 
@@ -35,97 +40,53 @@ export default {
   },
   data(){
     return {
-      player: null,
-      playCounter : 0,
-      playerReady:false,
-      onlyOnce: 0,
-      touchend_value:false,
-      VIDEO_ID :'lwuilvtfS4A',//'5Sx7xqv_oYk',
+      audio: null,
+      playStatus: false,
+      playOnce: false,
+      //VIDEO_ID :'lwuilvtfS4A',//'5Sx7xqv_oYk',
     };
   },
+  computed:{
+      isPlay : function(){
+        return this.playStatus;
+      }
+  },
   mounted(){
-    this.loadYouTubeAPI();
+    this.audio = new Audio(require('@/assets/musics/November_song.mp3'));
   },
   methods:{
-    touchstart(){
-      if (this.onlyOnce ==0){
-        this.play_player();
+    startPlayback(){
+      if(!this.playStatus && !this.playOnce){
+        this.playStatus = true;
+        this.playOnce = true;
+        this.playAudio();
       }
     },
-    loadYouTubeAPI(){
-      if (typeof window.YT === "undefined"){
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        window.onYouTubeIframeAPIReady = this.createPlayer;
-      }
-      else{
-        this.createPlayer();
-      }
-    },
-    createPlayer(){
-      console.log("Create Player")
-      this.player = new window.YT.Player("player", {
-        height: "100",
-        width: "100",
-        videoId: this.VIDEO_ID,
-        playerVars:{
-          'enablejsapi':1,
-          'controles':0,
-        },
-        events:{
-          'onReady': this.onPlayerReady,
-          'onStateChange': this.onPlayerStateChange,
-        },
-      });
-      console.log(this.player)
-    },
-    // 플레이어가 준비되었을 때 호출
-    onPlayerReady(event) {
-      console.log("YouTube player is ready.",event);
-      this.playerReady = true;
-    },
-    // 플레이어 상태가 변경되었을 때 호출
-    onPlayerStateChange(event) {
-      console.log("Player state changed:", event.data);
-      if (event.data == 1){
-        this.playCounter = 1
-      }
-      else{
-        this.playCounter = 0
+    playAudio(){
+      if (this.audio){
+        this.audio.play().then(() => {
+          console.log('Playback stgarted successfully');
+        })
+        .catch((error) => {
+          this.playStatus = false;
+          this.playOnce = false
+          console.log('Playback failed:', error);
+        });
       }
     },
-    playVideo(){
-      this.player.playVideo();
-    },
-    unMuteVideo(){
-      this.player.unMute();
-    },
-    play_player(){
-      console.log("play_player")
-      if (this.playerReady && this.player && this.playCounter!=1 && this.onlyOnce==0){
-        this.player.playVideo();
-        this.player.unMute();
-      }
-    },
-    pause_player(){
-      console.log("Pause Player");
-      if (this.playerReady && this.player && this.playCounter==1){
-        console.log("pause")
-        this.player.pauseVideo();
-        this.player.mute();
+    pauseAudio(){
+      if(this.audio){
+        this.audio.pause();
       }
     },
     play_pause_click(){
-      if (this.playerReady && this.player){
-        if(this.playCounter==1){
-          this.pause_player();
-          this.onlyOnce = 1;
-        }
-        else{
-          this.play_player();
-        }
+      if(this.playStatus){
+        this.playStatus = false;
+        this.pauseAudio();
+      }
+      else{
+        this.playStatus = true;
+        this.playAudio();
       }
     },
   },
@@ -134,12 +95,40 @@ export default {
 
 <style lang="scss" scoped>
 @font-face {
-  font-family: "DeluxeEdition";
-  src: url("@/assets/fonts/Deluxe Edition - Demo.ttf") format('truetype');
+  font-family: "OverlayTop";
+  //src: url("@/assets/fonts/Deluxe Edition - Demo.ttf") format('truetype');
+  //src: url("@/assets/fonts/Birds of Paradise.ttf") format('truetype');
+  //src: url("@/assets/fonts/Happy Selfie.ttf") format('truetype');
+  //src: url("@/assets/fonts/Huge Salmon.otf") format('truetype');
+  //src: url("@/assets/fonts/MilkyVintage.ttf") format('truetype');
+  src: url("@/assets/fonts/Mermaid1001.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
+.happy-wedding{
+  font-family: "OverlayTop";
+  //color: rgb(28, 196, 211);
+  //color: #95CC90;
+  color: #3E7043;
+  letter-spacing: 0.1em;
+  font-size: 3.5em;
+  //font-weight: 600;
+  margin: 10px;
+  line-height: 1.2;
+  .left{
+    text-align:left;
+    font-size: 1.1em;
+  }
+  .right{
+    text-align:right;
+    font-size: 0.9em;
+  }
+}
+
+.main-page{
+  padding-bottom: 2em;
+}
 .wedding-invite {
   position: relative;
   text-align: center;
@@ -152,13 +141,10 @@ export default {
   display: block;
 }
 
-.player-div{
-  display:none;
-}
 .text-overlay-corner {
   position: absolute;
   top: 2%;
-  right: 5%;
+  right: 2%;
   //background: rgba(255, 255, 255, 0);
   padding: 0px 0px;
   text-align: center;
@@ -166,10 +152,13 @@ export default {
 }
 .pause-play-button{
   color:rgb(30,48,80);
+  background-color: rgba(255,255,255,90);
+  opacity: 80%;
+  border-radius: 7px;
+  padding: 5px;
   cursor:pointer;
 }
-.text-overlay-top {
-  font-family: "DeluxeEdition";
+.text-overlay-bottom {
   position: absolute;
   bottom: 2%;
   left: 50%;
@@ -177,43 +166,34 @@ export default {
   background: rgba(255, 255, 255, 0);
   padding: 0px 0px;
   text-align: center;
-  color: rgb(28, 196, 211);
-  font-size: 1.8em;
-  width: 80%;
+  width: 100%;
 }
 
 .main-title{
-  bottom: 1%;
   padding: 0px 10px;
+  padding-bottom: 2em;
   text-align: center;
-}
-.our-name {
-  font-family: "MaruBuri", serif;
-  font-size: 28px;
-  text-align: center;
-  color: #000000;//#266653;
-  margin: 30px 0;
-  font-weight: 600;
-}
-.header{
-  // font-family: "MaruBuri";
-  // font-size: 18px;
-  // color: #000000;//#295238;
-  font-family: "MaruBuri", serif;
-  font-size: 28px;
+
+  //font-family: "MaruBuri", serif;
+  font-size: 1em;
   text-align: center;
   color: #000000;//#266653;
-  margin: 30px 0;
-  font-weight: 600;
+  margin: 30px 0 10px 0;
+  line-height: 1.8;
+}
+
+.location-date{
+  white-space: nowrap;
+
+  padding-left: $padding-vertical;
+  padding-right: $padding-vertical;
+
+  font-size: 1em;
+  line-height: 1.8;
+  text-align: center;
 }
 
 .no-wrap {
   white-space: nowrap;
-}
-
-.happy-wedding{
-  font-size: 2em;
-  font-weight: 600;
-  margin: 10px;
 }
 </style>

@@ -1,8 +1,7 @@
 <template>
   <div class="location">
     <div class="description">
-      Location
-      <br/> 오시는 길
+      오시는 길
     </div>
       <div class="location-detail">
         제이앤제이 아트컨벤션 2층 제이드팰리스홀
@@ -10,7 +9,7 @@
       <div class="location-address">
         경기도 평택시 비전5로 20-46<br/>
           <a href="tel:031-653-5300">
-            ☎️ 031-653-5300
+            031-653-5300
           </a>
       </div>
   </div>
@@ -42,6 +41,10 @@
               :lng="center_lng"/>
         </KakaoMap>
       </div>
+    </div>
+    <div class="pin-help">
+      <img src="https://map.pstatic.net/resource/api/v2/image/maps/selected-marker/default@2x.png?version=8" class="parking-log-icon">
+      을 클릭하면 주차장 위치를 확인할 수 있습니다.
     </div>
 
       <div class="cover">
@@ -209,24 +212,27 @@ export default {
 
 <style lang="scss" scoped>
 .location{
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 2em;
+  padding-bottom: 2em;
   padding-left: $padding-vertical/2;
   padding-right: $padding-vertical/2;
   text-align: center;
   color: #000000;//#295138;
+  background-color: #f9f9fb;
   .description {
-    font-size: 24px;
-    letter-spacing: 6px;
-    margin-bottom: 30px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    padding-bottom: 3em;
+    font-weight: 600;
+    color: #3E4F43;//#505050;
   }
   .location-detail{
     font-family: "MaruBuri";
-    font-weight: 600;
+    //font-weight: 600;
     padding-bottom: 15px;
   }
   .location-address{
-    line-height: 20px;
+    line-height: 1.5em;
   }
   .location-address a{
     color: inherit !important;
@@ -291,4 +297,12 @@ export default {
   cursor: pointer;
 }
 
+.pin-help{
+  font-size: 0.8em;
+  padding-top:1em;
+}
+.parking-log-icon{
+  width: 1em;
+
+}
 </style>

@@ -1,18 +1,15 @@
 <template>
   <div class="heartfelt-wishes">
     <div class="header">
-      <h2><strong> 신랑 & 신부에게 마음 전하기</strong></h2>
-    </div>
-    <div class="header-body">
-      <h3 style="display:none">축복의 의미로 축의금을 전달해보세요.</h3>
+      <h2> 신랑 & 신부에게 마음 전하기</h2>
     </div>
 
     <div class="body">
       <div class="section">
         <ul>
           <div class="section-title btn-wrap">
-            <a href="javascript:void(0);" :onclick="open_groom" class="an-btn btn type03 groom"> 신랑 측 계좌번호</a>
-            <a href="javascript:void(0);" :onclick="open_bride" class="an-btn btn type03 bride"> 신부 측 계좌번호</a>
+            <a href="javascript:void(0);" :onclick="open_groom" class="an-btn btn type03 groom"> 신랑 측 마음 전할 곳</a>
+            <a href="javascript:void(0);" :onclick="open_bride" class="an-btn btn type03 bride"> 신부 측 마음 전할 곳</a>
           </div>
         </ul>
       </div>
@@ -100,7 +97,9 @@ export default {
   text-align: center;
   font-family: "MaruBuri", serif;
   //background-color: #f9f9fb; 
-  padding: 20px;
+  padding-top: 2em;
+  padding-bottom:2em;
+  background-color: #f9f9fb;
 }
 
 .header {
@@ -108,13 +107,11 @@ export default {
   margin-bottom: 3px;
   flex: 1;
   padding: 10px;
+  padding-bottom: 1.3em;
   white-space: nowrap;
-  font-size:1.4em;
-}
-.header-body{
-  flex:0.5;
-  margin-bottom: 20px;
-  font-size:0.9em;
+  font-size:1.2em;
+  font-weight: 600;
+  color: #3E4F43;//#505050;
 }
 
 .body {
@@ -129,14 +126,15 @@ export default {
 }
 .section-title {
   margin-bottom: 10px;
-}
 
-.btn-wrap{
   padding: 0 6%;
   display: block;
 }
 
 .an-btn{
+  display:block;
+  text-align:center;
+  font-family: "Noto Sans KR", sans-serif;
   width: 100%;
   height: 50px;
   line-height: 50px;
@@ -147,51 +145,16 @@ export default {
   border: 1px solid #ddd;
   box-sizing: border-box;
   border-radius: 25px;
-}
-
-.btn{
-  display:block;
-  text-align:center;
-  font-family: "Noto Sans KR", sans-serif;
   letter-spacing: -0.38px;
-  font-weight: bold;
 }
 
 .btn.type03:not(:last-child){
   margin-bottom: 10px;
-
-}
-ul {
-  list-style: none;
-  padding: 5px;
-}
-
-li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-}
-
-strong {
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-.h3 {
-  padding: 10px;
-}
-
-h2, h3{
-  color: rgba(60,60,60,0.8);
 }
 
 a{
   text-decoration: none;
   cursor: pointer;
 }
-
-
-
 </style>
 

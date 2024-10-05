@@ -1,9 +1,6 @@
 <template>
   <div id="jong2">
 	<MainPage />
-	<MainDivider />
-	<MainSpacer />
-	<HeaderImage />
 	<Story />
 	<Contact />
 	<HeartfeltWishes />
@@ -14,9 +11,6 @@
 
 <script>
 import MainPage from "./components/MainPage.vue";
-import MainSpacer from "./components/MainSpacer.vue";
-import MainDivider from "./components/MainDivider.vue";
-import HeaderImage from "./components/HeaderImage.vue";
 import Contact from "./components/Contact.vue";
 import Story from "./components/Story.vue";
 import CustomGallery from "./components/CustomGallery.vue";
@@ -28,9 +22,6 @@ export default {
   name: "MainView",
   components: {
 	MainPage,
-	MainSpacer,
-	MainDivider,
-	HeaderImage,
 	Story,
 	Contact,
 	CustomGallery,
