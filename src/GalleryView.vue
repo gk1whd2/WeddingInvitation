@@ -3,7 +3,7 @@
 
 	<FilterButtons @loadPage="loadPage" @fetchPhotos="fetchPhotos" @updateImageSize="updateImageSize" @updateFilterStatus="updateFilterStatus"/>
 
-	<draggable :list="photos" class="photo-gallery" :move="checkMove">
+	<draggable ref="draggable" :list="photos" class="photo-gallery" @End="onDragEnd">
 		<div class="photo" v-for="(photo, index) in photos" :key="index">
 			<div class="icon-buttons">
 					<button :class="['icon-button', getStatusClass(photo,'trash')]" @click="toggleStatus(photo,'trash')">
@@ -180,21 +180,22 @@ export default {
 				this.fetchPhotos();
 			}
 		},
-		checkMove(evt){
-			const target1 = evt.draggedContext.element.filename;
-			const target2 = evt.relatedContext.element.filename;
-
-			console.log("Future Index: " + target1); 
-			console.log("RelatedContext: " + target2);
-
-			this.swapImageIndex(target1, target2);
+		onDragEnd(){
+			const real_index = this.$refs.draggable.realList
+			console.log(real_index);
+			const liked_base_index = 10000;
+			let new_index = {};
+			for(var i in real_index){
+				new_index[real_index[i].filename] = liked_base_index+ parseInt(i);
+			}
+			console.log(new_index);
+			this.updateImageIndex(new_index);
 		},
-		async swapImageIndex(target1, target2){
-			await axios.post('https://was.jong2.site:3000/api/swap_index',{
-				target1 : target1,
-				target2 : target2,
+		async updateImageIndex(new_indexes){
+			await axios.post('https://was.jong2.site:3000/api/update_index',{
+				new_indexes: new_indexes,
 			});
-			console.log("SWAP "+target1 + target2);
+			console.log("Update "+ new_indexes);
 		}
 
 	}
