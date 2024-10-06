@@ -1,26 +1,26 @@
 <template>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	<FilterButtons @loadPage="loadPage" @fetchPhotos="fetchPhotos" @updateFilterStatus="updateFilterStatus"/>
+	<FilterButtons @loadPage="loadPage" @fetchPhotos="fetchPhotos" @updateImageSize="updateImageSize" @updateFilterStatus="updateFilterStatus"/>
 
-	<div class="photo-gallery">
-	<div class="photo" v-for="(photo, index) in photos" :key="index">
-		<div class="icon-buttons">
-				<button :class="['icon-button', getStatusClass(photo,'trash')]" @click="toggleStatus(photo,'trash')">
-					<i class="fas fa-circle-minus"></i>
-				</button>
-				<button :class="['icon-button', getStatusClass(photo, 'check')]" @click="toggleStatus(photo,'check')">
-					<i class="fas fa-circle-check"></i>
-				</button>
-		</div>
-		<div class="like-button">
-			<div id="heart" :class="['heart', { 'is-active': photo.liked}]" @click="toggleLiked(photo)"> </div>
-		</div>
+	<draggable :list="photos" class="photo-gallery" :move="checkMove">
+		<div class="photo" v-for="(photo, index) in photos" :key="index">
+			<div class="icon-buttons">
+					<button :class="['icon-button', getStatusClass(photo,'trash')]" @click="toggleStatus(photo,'trash')">
+						<i class="fas fa-circle-minus"></i>
+					</button>
+					<button :class="['icon-button', getStatusClass(photo, 'check')]" @click="toggleStatus(photo,'check')">
+						<i class="fas fa-circle-check"></i>
+					</button>
+			</div>
+			<div class="like-button">
+				<div id="heart" :class="['heart', { 'is-active': photo.liked}]" @click="toggleLiked(photo)"> </div>
+			</div>
 
-		<img :src="thumbnailUrl(photo.filename)" :class="getSizeClass()" alt="photo" @click=handleClick(photoUrl(photo.filename))>
-		<br/> {{ photo.filename }}
-	</div>
-	</div>
+			<img :src="thumbnailUrl(photo.filename)" :class="getSizeClass()" alt="photo" @click=handleClick(photoUrl(photo.filename))>
+			<br/> {{ photo.filename }}
+		</div>
+	</draggable>
 
 	<PageNavigation @loadPage="loadPage" @fetchPhotos="fetchPhotos" :currentPageProps=this.currentPage :totalPagesProps=this.totalPages />
 
@@ -37,6 +37,7 @@ import axios from 'axios';
 import FilterButtons from "./GalleryComponents/FilterButtons.vue";
 import PageNavigation from "./GalleryComponents/PageNavigation.vue";
 import BottomSheet from "./components/BottomSheet.vue";
+import { VueDraggableNext} from 'vue-draggable-next';
 
 export default {
 	name: "GalleryView",
@@ -44,6 +45,7 @@ export default {
 		BottomSheet,
 		FilterButtons,
 		PageNavigation,
+		draggable: VueDraggableNext,
 	},
 	data() {
 		return {
@@ -52,7 +54,7 @@ export default {
 			image_size: 'small',
 			currentPage: 1,
 			totalPages : 1,
-			limit: 20,
+			limit: 50,
 			loading: false,
 
 			filterStatus: 'liked',
@@ -162,6 +164,11 @@ export default {
 		getSizeClass(){
 			return this.image_size === 'small' ? 'small-image' : 'large-image';
 		},
+		updateImageSize(image_size){
+			this.image_size = image_size;
+			console.log(this.image_size);
+			console.log(this.getSizeClass());
+		},
 		updateFilterStatus(status, page, limit){
 			this.filterStatus = status
 			this.currentPage = page
@@ -173,6 +180,23 @@ export default {
 				this.fetchPhotos();
 			}
 		},
+		checkMove(evt){
+			const target1 = evt.draggedContext.element.filename;
+			const target2 = evt.relatedContext.element.filename;
+
+			console.log("Future Index: " + target1); 
+			console.log("RelatedContext: " + target2);
+
+			this.swapImageIndex(target1, target2);
+		},
+		async swapImageIndex(target1, target2){
+			await axios.post('https://was.jong2.site:3000/api/swap_index',{
+				target1 : target1,
+				target2 : target2,
+			});
+			console.log("SWAP "+target1 + target2);
+		}
+
 	}
 };
 </script>
@@ -192,10 +216,12 @@ export default {
 	border-radius: 5px;
 }
 .small-image{
-	max-height: 255px;
+	//max-height: 255px;
+	max-height: 200px;
 }
 .large-image{
-	max-width: 100%;
+	//max-width: 100%;
+	max-height:400px;
 }
 
 .icon-buttons{

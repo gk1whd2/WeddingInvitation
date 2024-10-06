@@ -24,6 +24,7 @@ export default {
     return {
 		limit:20,
 		pageSizes: [10,20, 30, 50, 100],
+		image_size: 'small',
     };
   },
   mounted() {
@@ -37,6 +38,7 @@ export default {
 		},
 		toggleAllSize(){
 			this.image_size = this.image_size === 'small' ? 'large' : 'small';
+			this.$emit('updateImageSize', this.image_size);
 		},
 		updateLimit() {
 			this.currentPage = 1;
