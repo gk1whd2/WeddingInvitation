@@ -280,9 +280,11 @@ export default {
     font-family: "MaruBuri";
     //font-weight: 600;
     padding-bottom: 15px;
+    word-break:keep-all;
   }
   .location-address{
     line-height: 1.5em;
+    word-break:keep-all;
   }
   .location-address a{
     color: inherit !important;

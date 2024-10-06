@@ -31,11 +31,19 @@
       </div>
     </div>
 
+    <div class="section-header">
+      <div class="section-title">
+        <h3> 신랑 측 혼주</h3>
+      </div>
+      <div class="expand-button" @click="toggleSection">
+        <font-awesome-icon :icon="isSectionVisible ? 'chevron-up' : 'chevron-down'" />
+      </div>
+      <div class="section-title">
+        <h3> 신부 측 혼주</h3>
+      </div>
+    </div>
     <div class="body">
       <div class="section">
-        <div class="section-title">
-          <h3> 신랑 측 혼주</h3>
-        </div>
         <transition
           @before-enter="beforeEnter"
           @enter="enter"
@@ -73,15 +81,6 @@
       </div>
 
       <div class="section">
-        <h3 class="expand-button" @click="toggleSection">
-          <font-awesome-icon :icon="isSectionVisible ? 'chevron-up' : 'chevron-down'" />
-        </h3>
-      </div>
-
-      <div class="section">
-        <div class="section-title">
-          <h3> 신부 측 혼주</h3>
-        </div>
         <transition 
           @before-enter="beforeEnter"
           @enter="enter"
@@ -187,6 +186,7 @@ mounted() {
     margin-bottom: 40px;
     padding-top: 2em;
     padding-bottom:2em;
+    word-break:keep-all;
   }
 }
 
@@ -204,6 +204,11 @@ mounted() {
 
 .section {
   flex: 1;
+  padding: 10px;
+  white-space: nowrap;
+}
+.section-header{
+  display:flex;
   padding: 10px;
   white-space: nowrap;
 }

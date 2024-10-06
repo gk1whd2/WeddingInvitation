@@ -44,7 +44,7 @@ export default {
   padding-right: $padding-vertical;
   text-align: center;
 
-  font-size: 16px;
+  font-size: 1em;
   line-height: 40px;
   .story-title{
     color: #3E4F43;//#505050;
@@ -64,8 +64,8 @@ export default {
     padding-top: 10px;
     padding-bottom: 2em;
     word-break:keep-all;
-    white-space:nowrap;
-    overflow:hidden;
+    //white-space:nowrap;
+    //overflow:hidden;
   }
 }
 </style>
