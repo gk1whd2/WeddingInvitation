@@ -91,13 +91,14 @@ export default {
         const response = await axios.get('https://was.jong2.site:3000/api/gallery_photos', {
           params: {
             page: 1,
-            limit: 20,
+            limit: 50,
             filter: 'liked'
           }
         });
         const { images, total_pages } = response.data;
         this.photos = images;
         this.totalPages = total_pages;
+        console.log(images);
       } catch (error) {
         console.error('Error fetching photos:', error);
       } finally {
